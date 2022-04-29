@@ -19,6 +19,16 @@ types
   * Returns exact response from the `/proc` file system
   * For more about the format of these responses, refer to the proc(5) manpage
 
+Security tokens
+---------------
+
+The application provides the `-a` flag, which accepts a path as a required
+argument. The file specified in the path should contain a series of strings,
+each on a new line. Each line represents a valid token that the client can send
+to authorize the request. This token must be send in a `Authorization:` header.
+If the token is not given, or the wrong token is given, the server will instead
+return a 403.
+
 Proc file responses
 ============
 
