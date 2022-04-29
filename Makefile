@@ -10,7 +10,8 @@ FLAGS  = -pipe
 
 CFLAGS  = -Wall
 CFLAGS += -Ofast
-CFLAGS += -g
+#CFLAGS += -flto
+#CFLAGS += -g
 #CFLAGS += -pg
 
 LIBRARIES = -lpthread
