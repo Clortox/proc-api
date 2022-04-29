@@ -102,6 +102,12 @@ void setRoutes(crow::SimpleApp& app){
         return ret;
     });
 
+    CROW_ROUTE(app, "/up")([](){
+        crow::json::wvalue ret;
+        ret["message"] = "Alive and well!";
+        return ret;
+    });
+
     //catchall route
     CROW_CATCHALL_ROUTE(app)([](){
         crow::json::wvalue ret;

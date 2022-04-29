@@ -79,7 +79,7 @@ Sample response
 }
 ```
 
-Special formatted responses
+Special formatted responses and aliases
 ===========================
 
 [GET] /uptime
@@ -113,3 +113,9 @@ Sample response
 ---------------
 
 * Returns redirect to /proc/sys/kernel/hostname
+
+[GET] /up
+---------
+
+* Always returns a 200 OK
+* Can be used for testing latency
