@@ -6,7 +6,7 @@
 
 #include "memory.hpp"
 
-void memory::getProcMem(crow::json::wvalue& ret){
+bool memory::getProcMem(crow::json::wvalue& ret){
     std::ifstream f ("/proc/meminfo");
     std::string line;
     if(f.is_open()){
@@ -20,11 +20,27 @@ void memory::getProcMem(crow::json::wvalue& ret){
                     last_space = i;
             }
 
-            std::cerr << colon << " " << last_space << std::endl;
-
             ret[line.substr(0,colon)] = line.substr(last_space);
         }
     } else {
         ret["message"] = "Failed to open proc filesystem";
+        return false;
     }
+
+    return true;
+}
+
+bool memory::getRawProcMem(std::string& ret){
+    std::ifstream f ("/proc/meminfo");
+    std::string line;
+    if(f.is_open()){
+        while(std::getline(f, line)){
+            ret += line;
+        }
+    } else {
+        ret = "Failed to open proc filesystem";
+        return false;
+    }
+
+    return true;
 }

@@ -12,6 +12,7 @@
 #include <fstream>
 
 namespace memory{
-    void getProcMem(crow::json::wvalue&);
-    void getEasyMem(crow::json::wvalue&);
+    bool getProcMem(crow::json::wvalue&);
+    bool getRawProcMem(std::string&);
+    bool getEasyMem(crow::json::wvalue&);
 }
