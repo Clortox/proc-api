@@ -10,7 +10,7 @@ FLAGS  = -pipe
 
 CFLAGS  = -Wall
 CFLAGS += -Ofast
-#CFLAGS += -flto
+CFLAGS += -flto
 #CFLAGS += -g
 #CFLAGS += -pg
 
@@ -23,7 +23,7 @@ BIN = ./bin
 PREFIX    = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 
-TARGET = crowtest
+TARGET = proc-api
 
 MAKEFLAGS += --jobs=4
 
