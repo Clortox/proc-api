@@ -65,6 +65,20 @@ Sample response
 }
 ```
 
+[GET] /proc/sys/kernel/hostname
+--------------------------------
+
+* returns hostname
+* Same as /proc/sys/kernel/hostname file
+
+Sample response
+
+```
+{
+  "hostname": "Samplebox"
+}
+```
+
 Special formatted responses
 ===========================
 
@@ -94,3 +108,8 @@ Sample response
   "memavailable" : 12324924,
 }
 ```
+
+[GET] /hostname
+---------------
+
+* Returns redirect to /proc/sys/kernel/hostname

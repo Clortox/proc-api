@@ -79,6 +79,29 @@ void setRoutes(crow::SimpleApp& app){
         return ret;
     });
 
+    CROW_ROUTE(app, "/proc/sys/kernel/hostname")([](const crow::request& req){
+        bool status;
+        std::string accept = req.get_header_value("Accept");
+
+        std::transform(accept.begin(), accept.end(), accept.begin(), ::tolower);
+
+        if(accept == "text/plain"){
+            accept.clear();
+            status = state::getRawHostname(accept);
+            return crow::response(status ? 200 : 503, accept);
+        } else {
+            crow::json::wvalue json;
+            status = state::getHostname(json);
+            return crow::response(status ? 200 : 503, json.dump());
+        }
+    });
+
+    CROW_ROUTE(app, "/hostname")([](){
+        crow::response ret;
+        ret.moved_perm("/proc/sys/kernel/hostname");
+        return ret;
+    });
+
     //catchall route
     CROW_CATCHALL_ROUTE(app)([](){
         crow::json::wvalue ret;

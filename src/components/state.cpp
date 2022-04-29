@@ -90,3 +90,33 @@ bool state::getRawLoadAvg(std::string& ret){
 
     return true;
 }
+
+bool state::getHostname(crow::json::wvalue& ret){
+    std::ifstream f (prochostnamepath);
+    std::string line;
+    if(f.is_open()){
+        std::getline(f, line);
+
+        ret["hostname"] = line;
+        f.close();
+    } else {
+        ret["message"] = "Failed to open proc filesystem";
+        return false;
+    }
+
+    return true;
+}
+
+bool state::getRawHostname(std::string& ret){
+    std::ifstream f (prochostnamepath);
+    if(f.is_open()){
+        std::getline(f, ret);
+        ret += '\n';
+        f.close();
+    } else {
+        ret = "Failed to open proc filesystem";
+        return false;
+    }
+
+    return true;
+}
