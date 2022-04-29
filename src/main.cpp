@@ -6,18 +6,25 @@
 
 #include <iostream>
 #include <crow.h>
+#include "opt/parseopt.hpp"
+
+#include "routes.hpp"
 
 int main(int argc, char** argv){
+
+    option_flags* flags = parse_options(argc, argv);
+
     crow::SimpleApp app;
-    CROW_ROUTE(app, "/")([](){
-        return "Hello World";
-    });
 
-    CROW_ROUTE(app, "/json")([]{
-        crow::json::wvalue response({{ "message", "Hello world" }});
-        response["kek"] = "nay, cringe";
-        return response;
-    });
+    setRoutes(app);
 
-    app.port(5000).run();
+    std::cerr << "Setting up app" << std::endl;
+
+    app.port(flags->port)
+        .server_name("proc_api")
+        .multithreaded();
+
+    delete flags;
+
+    app.run();
 }
