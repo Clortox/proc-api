@@ -8,7 +8,10 @@
 
 void setRoutes(crow::SimpleApp& app){
     CROW_ROUTE(app, "/proc/meminfo")([]{
-        return "Meminfo";
+        crow::json::wvalue json;
+        memory::getProcMem(json);
+
+        return json;
     });
 
     CROW_ROUTE(app, "/mem")([]{
