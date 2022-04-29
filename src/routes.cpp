@@ -79,4 +79,12 @@ void setRoutes(crow::SimpleApp& app){
         return ret;
     });
 
+    //catchall route
+    CROW_CATCHALL_ROUTE(app)([](){
+        crow::json::wvalue ret;
+        ret["message"] = "Route not understood. Please refer to the documentation";
+
+        return crow::response(404, ret.dump());
+    });
+
 }
