@@ -11,5 +11,6 @@
 
 #include <crow.h>
 #include "components/memory.hpp"
+#include "components/state.hpp"
 
 void setRoutes(crow::SimpleApp&);

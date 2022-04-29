@@ -24,7 +24,17 @@ void setRoutes(crow::SimpleApp& app){
         }
     });
 
+    CROW_ROUTE(app, "/proc/uptime")([](){
+        crow::json::wvalue json;
+        bool status;
+
+        status = state::getUptime(json);
+        return crow::response(status ? 200: 503, json.dump());
+
+    });
+
     CROW_ROUTE(app, "/mem")([]{
         return "mem";
     });
+
 }
