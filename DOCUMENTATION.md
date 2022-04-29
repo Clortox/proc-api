@@ -26,7 +26,7 @@ Proc file responses
 -------------
 
 * returns uptime and idle time
-* Same as /proc/uptime
+* Same as /proc/uptime file
 
 Sample response
 
@@ -41,10 +41,16 @@ Sample response
 -------------------
 
 * returns infomration regarding system memory
-* Same as /proc/meminfo
+* All responses are in kB
+* Same as /proc/meminfo file
 
 Special formatted responses
 ===========================
+
+[GET] /uptime
+-------------
+
+* Returns a redirect to /proc/uptime
 
 [GET] /load
 ----------

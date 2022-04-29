@@ -41,6 +41,12 @@ void setRoutes(crow::SimpleApp& app){
         }
     });
 
+    CROW_ROUTE(app, "/uptime")([](){
+        crow::response ret;
+        ret.moved_perm("/proc/uptime");
+        return ret;
+    });
+
     CROW_ROUTE(app, "/mem")([]{
         return "mem";
     });
