@@ -11,6 +11,8 @@ void help(char* progName){
     std::cout << "Options:\n";
     std::cout << " [-p PORT]     Port to listen on (Default 5000)\n";
     std::cout << " [-n NAME]     Server name (Default \"proc-api\")\n";
+    std::cout << " [-a PATH]     Path to file containing authorization tokens\n";
+    std::cout << "               If the -a flag is not passed, no authorization is used\n";
     std::cout << " [-h]          Display this help message\n\n";
     exit(1);
 }
@@ -22,6 +24,7 @@ option_flags* parse_options(int argc, char** argv){
 
     ret->port = 5000;
     ret->name = "proc-api";
+    ret->auth_path = "";
 
     while((c = getopt(argc, argv, optarg_string)) != -1){
         switch(c){
@@ -30,6 +33,9 @@ option_flags* parse_options(int argc, char** argv){
                 break;
             case 'n':
                 ret->name = std::string(optarg);
+                break;
+            case 'a':
+                ret->auth_path = std::string(optarg);
                 break;
             case '?':
                 std::cerr << "Unkown option: " << (char)optopt << "\n";

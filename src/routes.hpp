@@ -13,4 +13,6 @@
 #include "components/memory.hpp"
 #include "components/state.hpp"
 
+#include "auth/auth.hpp"
+
 void setRoutes(crow::SimpleApp&);

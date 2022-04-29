@@ -8,6 +8,9 @@
 
 void setRoutes(crow::SimpleApp& app){
     CROW_ROUTE(app, "/proc/meminfo")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
+
         bool status;
         std::string accept = req.get_header_value("Accept");
 
@@ -24,7 +27,9 @@ void setRoutes(crow::SimpleApp& app){
         }
     });
 
-    CROW_ROUTE(app, "/mem")([](){
+    CROW_ROUTE(app, "/mem")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         bool status;
 
         crow::json::wvalue json;
@@ -34,6 +39,8 @@ void setRoutes(crow::SimpleApp& app){
     });
 
     CROW_ROUTE(app, "/proc/uptime")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         bool status;
         std::string accept = req.get_header_value("Accept");
 
@@ -50,13 +57,17 @@ void setRoutes(crow::SimpleApp& app){
         }
     });
 
-    CROW_ROUTE(app, "/uptime")([](){
+    CROW_ROUTE(app, "/uptime")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         crow::response ret;
         ret.moved_perm("/proc/uptime");
         return ret;
     });
 
     CROW_ROUTE(app, "/proc/loadavg")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         bool status;
         std::string accept = req.get_header_value("Accept");
 
@@ -73,13 +84,17 @@ void setRoutes(crow::SimpleApp& app){
         }
     });
 
-    CROW_ROUTE(app, "/load")([](){
+    CROW_ROUTE(app, "/load")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         crow::response ret;
         ret.moved_perm("/proc/loadavg");
         return ret;
     });
 
     CROW_ROUTE(app, "/proc/sys/kernel/hostname")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         bool status;
         std::string accept = req.get_header_value("Accept");
 
@@ -96,20 +111,27 @@ void setRoutes(crow::SimpleApp& app){
         }
     });
 
-    CROW_ROUTE(app, "/hostname")([](){
+    CROW_ROUTE(app, "/hostname")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         crow::response ret;
         ret.moved_perm("/proc/sys/kernel/hostname");
         return ret;
     });
 
-    CROW_ROUTE(app, "/up")([](){
+    CROW_ROUTE(app, "/up")([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
+
         crow::json::wvalue ret;
         ret["message"] = "Alive and well!";
-        return ret;
+        return crow::response(200, ret.dump());
     });
 
     //catchall route
-    CROW_CATCHALL_ROUTE(app)([](){
+    CROW_CATCHALL_ROUTE(app)([](const crow::request& req){
+        if(!auth::checkAuth(req))
+            return crow::response(403, "Authentication required");
         crow::json::wvalue ret;
         ret["message"] = "Route not understood. Please refer to the documentation";
 
