@@ -18,10 +18,8 @@ int main(int argc, char** argv){
 
     setRoutes(app);
 
-    std::cerr << "Setting up app" << std::endl;
-
     app.port(flags->port)
-        .server_name("proc_api")
+        .server_name(flags->name)
         .multithreaded();
 
     delete flags;
