@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <string>
+#include <algorithm>
 
 #include <crow.h>
 #include "components/memory.hpp"

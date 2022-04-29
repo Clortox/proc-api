@@ -36,6 +36,7 @@ bool memory::getRawProcMem(std::string& ret){
     if(f.is_open()){
         while(std::getline(f, line)){
             ret += line;
+            ret += "\n";
         }
     } else {
         ret = "Failed to open proc filesystem";

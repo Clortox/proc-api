@@ -9,13 +9,19 @@
 void setRoutes(crow::SimpleApp& app){
     CROW_ROUTE(app, "/proc/meminfo")([](const crow::request& req){
         crow::json::wvalue json;
+        bool status;
+        std::string accept = req.get_header_value("Accept");
 
-        std::cerr << "Accept: " << req.get_header_value("Accept") << "\n";
+        std::transform(accept.begin(), accept.end(), accept.begin(), ::tolower);
 
-        if(memory::getProcMem(json))
-            return crow::response(200, json.dump());
-        else
-            return crow::response(503, json.dump());
+        if(accept == "text/plain"){
+            accept.clear();
+            status = memory::getRawProcMem(accept);
+            return crow::response(status ? 200 : 503, accept);
+        } else {
+            status = memory::getProcMem(json);
+            return crow::response(status ? 200 : 503, json.dump());
+        }
     });
 
     CROW_ROUTE(app, "/mem")([]{
