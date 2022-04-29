@@ -23,7 +23,7 @@ bool memory::getProcMem(crow::json::wvalue& ret){
                     final_space = i;
             }
 
-            ret[line.substr(0,colon)] = line.substr(last_space, final_space - last_space);
+            ret[line.substr(0,colon)] = std::stof(line.substr(last_space, final_space - last_space));
         }
     } else {
         ret["message"] = "Failed to open proc filesystem";
