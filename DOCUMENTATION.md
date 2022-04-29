@@ -44,6 +44,27 @@ Sample response
 * All responses are in kB
 * Same as /proc/meminfo file
 
+[GET] /proc/loadavg
+-------------------
+
+* returns system load averaged over 1, 5, and 10 mins
+* returns number of currently running processes over the total number of
+  process
+* returns the last proccessed PID used
+* Same as /proc/loadavg file
+
+Sample response
+
+```
+{
+  "1" : 0.56,
+  "5" : 0.69,
+  "10" : 1.30,
+  "processes" : "2/849",
+  "lastPID" : 28225,
+}
+```
+
 Special formatted responses
 ===========================
 
@@ -55,18 +76,7 @@ Special formatted responses
 [GET] /load
 ----------
 
-* Returns load average over the past 1, 5, and 10 mins
-* formatted version of /proc/loadavg
-
-Sample response
-
-```
-{
-  "1" : 0.56
-  "5" : 0.69
-  "10" : 1.30
-}
-```
+* Returns a redirect to /proc/loadavg
 
 [GET] /mem
 ----------
