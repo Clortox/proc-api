@@ -11,8 +11,11 @@
 #include <string>
 #include <fstream>
 
+constexpr char procmempath[] = "/proc/meminfo";
+
 namespace memory{
     bool getProcMem(crow::json::wvalue&);
     bool getRawProcMem(std::string&);
     bool getEasyMem(crow::json::wvalue&);
+    bool getRawEasyMem(std::string&);
 }

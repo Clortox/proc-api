@@ -82,7 +82,5 @@ Sample response
   "memtotal" : 16255116,
   "memfree"  : 2127320,
   "memavailable" : 12324924,
-  "swaptotal" : 0,
-  "swapfree" : 0,
 }
 ```
