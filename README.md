@@ -12,7 +12,14 @@ What is this good for?
 * Collecting stats on a remote system
 * Client applications for VPS hosters
 
-What is the API?
-----------------
+How do I talk to the API?
+-------------------------
 
 See [DOCUMENTATION.md](DOCUMENTATION.md)
+
+Features/TODO
+-------------
+
+* [X] Basic routing
+* [X] Authentication
+* [ ] Support for querying a PID
