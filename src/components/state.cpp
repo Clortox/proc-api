@@ -23,6 +23,8 @@ bool state::getUptime(crow::json::wvalue& ret){
         ret["uptime"] = std::stof(line.substr(0, space));
         ret["idle"] = std::stof(line.substr(space+1));
 
+        f.close();
+
     } else {
         ret["message"] = "Failed to open proc filesystem";
         return false;
@@ -32,5 +34,15 @@ bool state::getUptime(crow::json::wvalue& ret){
 }
 
 bool state::getRawUptime(std::string& ret){
+    std::ifstream f ("/proc/uptime");
+    if(f.is_open()){
+        std::getline(f, ret);
+        ret += "\n";
+        f.close();
+    } else {
+        ret = "Failed to open proc filesystem";
+        return false;
+    }
+
     return true;
 }
