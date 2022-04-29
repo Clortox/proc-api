@@ -17,5 +17,4 @@ namespace memory{
     bool getProcMem(crow::json::wvalue&);
     bool getRawProcMem(std::string&);
     bool getEasyMem(crow::json::wvalue&);
-    bool getRawEasyMem(std::string&);
 }

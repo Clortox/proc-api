@@ -80,8 +80,3 @@ bool memory::getEasyMem(crow::json::wvalue& ret){
 
     return true;
 }
-
-bool memory::getRawEasyMem(std::string& ret){
-    std::ifstream f (procmempath);
-
-}

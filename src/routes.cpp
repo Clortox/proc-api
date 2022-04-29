@@ -24,19 +24,12 @@ void setRoutes(crow::SimpleApp& app){
         }
     });
 
-    CROW_ROUTE(app, "/mem")([](const crow::request& req){
+    CROW_ROUTE(app, "/mem")([](){
         bool status;
-        std::string accept = req.get_header_value("Accept");
 
-        std::transform(accept.begin(), accept.end(), accept.begin(), ::tolower);
-
-        if(accept == "text/plain"){
-            accept.clear();
-        } else {
-            crow::json::wvalue json;
-            status = memory::getEasyMem(json);
-            return crow::response(status ? 200 : 503, json.dump());
-        }
+        crow::json::wvalue json;
+        status = memory::getEasyMem(json);
+        return crow::response(status ? 200 : 503, json.dump());
 
     });
 
