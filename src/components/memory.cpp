@@ -13,14 +13,17 @@ bool memory::getProcMem(crow::json::wvalue& ret){
         while(std::getline(f, line)){
             size_t colon;
             int last_space = -1;
+            int final_space = -1;
             for(int i = 0; line[i] != '\0' ; ++i){
                 if(line[i] == ':')
                     colon = i;
-                else if(line[i-1] == ' ' && line[i] != ' ' && last_space == -1)
+                else if(last_space == -1 && line[i-1] == ' ' && line[i] != ' ' )
                     last_space = i;
+                else if(last_space != -1 && line[i] == ' ')
+                    final_space = i;
             }
 
-            ret[line.substr(0,colon)] = line.substr(last_space);
+            ret[line.substr(0,colon)] = line.substr(last_space, final_space - last_space);
         }
     } else {
         ret["message"] = "Failed to open proc filesystem";
