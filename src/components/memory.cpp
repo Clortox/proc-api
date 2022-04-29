@@ -7,7 +7,7 @@
 #include "memory.hpp"
 
 bool memory::getProcMem(crow::json::wvalue& ret){
-    std::ifstream f (procmempath);
+    std::ifstream f (PROC_MEM_PATH);
     std::string line;
     if(f.is_open()){
         while(std::getline(f, line)){
@@ -36,7 +36,7 @@ bool memory::getProcMem(crow::json::wvalue& ret){
 }
 
 bool memory::getRawProcMem(std::string& ret){
-    std::ifstream f (procmempath);
+    std::ifstream f (PROC_MEM_PATH);
     std::string line;
     if(f.is_open()){
         while(std::getline(f, line)){
@@ -53,7 +53,7 @@ bool memory::getRawProcMem(std::string& ret){
 }
 
 bool memory::getEasyMem(crow::json::wvalue& ret){
-    std::ifstream f (procmempath);
+    std::ifstream f (PROC_MEM_PATH);
     std::string line;
     if(f.is_open()){
         for(int j = 0; j < 3; ++j){

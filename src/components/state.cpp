@@ -7,7 +7,7 @@
 #include "state.hpp"
 
 bool state::getUptime(crow::json::wvalue& ret){
-    std::ifstream f (procuptimepath);
+    std::ifstream f (PROC_UPTIME_PATH);
     std::string line;
     if(f.is_open()){
         int space = -1;
@@ -34,7 +34,7 @@ bool state::getUptime(crow::json::wvalue& ret){
 }
 
 bool state::getRawUptime(std::string& ret){
-    std::ifstream f (procuptimepath);
+    std::ifstream f (PROC_UPTIME_PATH);
     if(f.is_open()){
         std::getline(f, ret);
         ret += '\n';
@@ -48,7 +48,7 @@ bool state::getRawUptime(std::string& ret){
 }
 
 bool state::getLoadAvg(crow::json::wvalue& ret){
-    std::ifstream f (procloadavgpath);
+    std::ifstream f (PROC_LOADAVG_PATH);
     std::string line;
     if(f.is_open()){
         int spaces[4];
@@ -78,7 +78,7 @@ bool state::getLoadAvg(crow::json::wvalue& ret){
 }
 
 bool state::getRawLoadAvg(std::string& ret){
-    std::ifstream f (procloadavgpath);
+    std::ifstream f (PROC_LOADAVG_PATH);
     if(f.is_open()){
         std::getline(f, ret);
         ret += '\n';
@@ -92,7 +92,7 @@ bool state::getRawLoadAvg(std::string& ret){
 }
 
 bool state::getHostname(crow::json::wvalue& ret){
-    std::ifstream f (prochostnamepath);
+    std::ifstream f (PROC_HOSTNAME_PATH);
     std::string line;
     if(f.is_open()){
         std::getline(f, line);
@@ -108,7 +108,7 @@ bool state::getHostname(crow::json::wvalue& ret){
 }
 
 bool state::getRawHostname(std::string& ret){
-    std::ifstream f (prochostnamepath);
+    std::ifstream f (PROC_HOSTNAME_PATH);
     if(f.is_open()){
         std::getline(f, ret);
         ret += '\n';

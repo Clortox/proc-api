@@ -11,9 +11,9 @@
 #include <string>
 #include <fstream>
 
-constexpr char procuptimepath[] = "/proc/uptime";
-constexpr char procloadavgpath[] = "/proc/loadavg";
-constexpr char prochostnamepath[] = "/proc/sys/kernel/hostname";
+constexpr char PROC_UPTIME_PATH[] = "/proc/uptime";
+constexpr char PROC_LOADAVG_PATH[] = "/proc/loadavg";
+constexpr char PROC_HOSTNAME_PATH[] = "/proc/sys/kernel/hostname";
 
 namespace state{
     bool getUptime(crow::json::wvalue&);
