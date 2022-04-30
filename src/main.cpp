@@ -28,7 +28,7 @@ int main(int argc, char** argv){
 
     app.port(flags->port)
         .server_name(flags->name)
-        .multithreaded();
+        .concurrency(flags->threads);
 
     delete flags;
 

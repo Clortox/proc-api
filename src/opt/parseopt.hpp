@@ -12,10 +12,11 @@
 ///////////////////////////////////////
 // cli options
 
-constexpr char optarg_string[] = "n:p:a:h";
+constexpr char optarg_string[] = "n:p:a:t:h";
 
 struct option_flags {
     uint16_t port;
+    uint16_t threads;
     std::string name;
     std::string auth_path;
 };

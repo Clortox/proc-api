@@ -13,6 +13,7 @@ void help(char* progName){
     std::cout << " [-n NAME]     Server name (Default \"proc-api\")\n";
     std::cout << " [-a PATH]     Path to file containing authorization tokens\n";
     std::cout << "               If the -a flag is not passed, no authorization is used\n";
+    std::cout << " [-t THREADS]  Number of threads to use. By default, uses 2 threads\n";
     std::cout << " [-h]          Display this help message\n\n";
     exit(1);
 }
@@ -23,6 +24,7 @@ option_flags* parse_options(int argc, char** argv){
     option_flags* ret = new option_flags;
 
     ret->port = 5000;
+    ret->threads = 2;
     ret->name = "proc-api";
     ret->auth_path = "";
 
@@ -36,6 +38,11 @@ option_flags* parse_options(int argc, char** argv){
                 break;
             case 'a':
                 ret->auth_path = std::string(optarg);
+                break;
+            case 't':
+                ret->threads = atoi(optarg);
+                if(ret->threads == 0)
+                    ret->threads = 1;
                 break;
             case '?':
                 std::cerr << "Unkown option: " << (char)optopt << "\n";
