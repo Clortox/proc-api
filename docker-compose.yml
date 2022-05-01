@@ -1,0 +1,20 @@
+# NOTE: This is a sample docker-compose for how you could set up your own set
+# of containers
+version: '3'
+services:
+  proc-api_service:
+    image: proc-api
+    container_name: proc-api_service
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+      - 6123:6123
+    environment:
+      - PORT=6123
+      - NAME="My Cool Service"
+      - THREADS=4
+      #-AUTH="./auth.txt"
+      #NOTE for auth to work, you will need to mount a volume with the authfile
+      #in it
+
+
